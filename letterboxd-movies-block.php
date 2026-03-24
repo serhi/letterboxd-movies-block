@@ -24,5 +24,13 @@ define( 'LMB_VERSION', '1.0.0' );
 define( 'LMB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LMB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
+add_action( 'init', function () {
+	load_plugin_textdomain(
+		'letterboxd-movies-block',
+		false,
+		dirname( plugin_basename( __FILE__ ) ) . '/languages'
+	);
+} );
+
 require_once LMB_PLUGIN_DIR . 'includes/block.php';
 require_once LMB_PLUGIN_DIR . 'includes/settings.php';

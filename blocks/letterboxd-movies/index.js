@@ -6,6 +6,7 @@
 	var PanelBody         = wp.components.PanelBody;
 	var RangeControl      = wp.components.RangeControl;
 	var ToggleControl     = wp.components.ToggleControl;
+	var __                = wp.i18n.__;
 
 	var letterboxdIcon = el(
 		'svg',
@@ -27,33 +28,33 @@
 					{ key: 'inspector' },
 					el(
 						PanelBody,
-						{ title: 'Display Settings', initialOpen: true },
+						{ title: __( 'Display Settings', 'letterboxd-movies-block' ), initialOpen: true },
 						el( RangeControl, {
-							label:    'Columns',
+							label:    __( 'Columns', 'letterboxd-movies-block' ),
 							value:    attr.columns,
 							min:      1,
 							max:      6,
 							onChange: function ( v ) { set( { columns: v } ); },
 						} ),
 						el( RangeControl, {
-							label:    'Number of movies',
+							label:    __( 'Number of movies', 'letterboxd-movies-block' ),
 							value:    attr.moviesCount,
 							min:      1,
 							max:      20,
 							onChange: function ( v ) { set( { moviesCount: v } ); },
 						} ),
 						el( ToggleControl, {
-							label:    'Show poster',
+							label:    __( 'Show poster', 'letterboxd-movies-block' ),
 							checked:  attr.showImage,
 							onChange: function ( v ) { set( { showImage: v } ); },
 						} ),
 						el( ToggleControl, {
-							label:    'Show title',
+							label:    __( 'Show title', 'letterboxd-movies-block' ),
 							checked:  attr.showTitle,
 							onChange: function ( v ) { set( { showTitle: v } ); },
 						} ),
 						el( ToggleControl, {
-							label:    'Show rating',
+							label:    __( 'Show rating', 'letterboxd-movies-block' ),
 							checked:  attr.showRating,
 							onChange: function ( v ) { set( { showRating: v } ); },
 						} )

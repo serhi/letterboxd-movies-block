@@ -147,5 +147,11 @@ function lbm_register_block() {
 			'render_callback' => 'lbm_render_callback',
 		)
 	);
+
+	wp_set_script_translations(
+		'letterboxd-movies-movies-editor-script',
+		'letterboxd-movies-block',
+		LMB_PLUGIN_DIR . 'languages'
+	);
 }
 add_action( 'init', 'lbm_register_block' );
