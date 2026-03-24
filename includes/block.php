@@ -53,15 +53,17 @@ function lbm_get_recent_movies( $username, $limit = 4 ) {
 		preg_match( '/<img[^>]+src="([^">]+)"/', (string) $item->description, $m );
 		$image = $m[1] ?? '';
 
-		// Extract member rating from Letterboxd custom XML namespace.
-		$lb_ns  = $item->children( 'letterboxd', true );
-		$rating = isset( $lb_ns->memberRating ) ? (float) $lb_ns->memberRating : null;
+		// Extract member rating and rewatch flag from Letterboxd custom XML namespace.
+		$lb_ns   = $item->children( 'letterboxd', true );
+		$rating  = isset( $lb_ns->memberRating ) ? (float) $lb_ns->memberRating : null;
+		$rewatch = isset( $lb_ns->rewatch ) && 'Yes' === (string) $lb_ns->rewatch;
 
 		$movies[] = array(
-			'title'  => $title,
-			'link'   => $link,
-			'image'  => $image,
-			'rating' => $rating,
+			'title'   => $title,
+			'link'    => $link,
+			'image'   => $image,
+			'rating'  => $rating,
+			'rewatch' => $rewatch,
 		);
 
 		$count++;
@@ -127,7 +129,14 @@ function lbm_render_callback( $attributes ) {
 					<p class="lbm-title"><?php echo esc_html( $movie['title'] ); ?></p>
 				<?php endif; ?>
 				<?php if ( $show_rating && $movie['rating'] !== null ) : ?>
-					<span class="lbm-rating"><?php echo esc_html( lbm_rating_to_stars( $movie['rating'] ) ); ?></span>
+					<span class="lbm-rating">
+						<?php if ( $movie['rewatch'] ) : ?>
+							<span class="lbm-rewatch" title="<?php esc_attr_e( 'Rewatch', 'letterboxd-movies-block' ); ?>">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="12" height="12" aria-hidden="true"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+							</span>
+						<?php endif; ?>
+						<?php echo esc_html( lbm_rating_to_stars( $movie['rating'] ) ); ?>
+					</span>
 				<?php endif; ?>
 			</a>
 		<?php endforeach; ?>

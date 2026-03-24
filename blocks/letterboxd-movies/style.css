@@ -32,4 +32,13 @@
 .lbm-rating {
 	font-size: 0.85rem;
 	color: var(--wp--preset--color--accent, #e67e22);
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.lbm-rewatch {
+	display: inline-flex;
+	align-items: center;
+	opacity: 0.8;
 }
