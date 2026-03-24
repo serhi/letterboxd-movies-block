@@ -40,5 +40,6 @@
 .lbm-rewatch {
 	display: inline-flex;
 	align-items: center;
+	color: var(--wp--preset--color--contrast-2);
 	opacity: 0.8;
 }
