@@ -1,0 +1,29 @@
+.lbm-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	gap: 1rem;
+}
+
+.lbm-card {
+	text-decoration: none;
+	color: inherit;
+}
+
+.lbm-card img {
+	width: 100%;
+	aspect-ratio: 2/3;
+	object-fit: cover;
+	border-radius: 8px;
+	display: block;
+}
+
+.lbm-title {
+	font-size: 0.95rem;
+	margin: 0.5rem 0 0;
+	font-weight: 600;
+}
+
+.lbm-rating {
+	font-size: 0.85rem;
+	color: var(--wp--preset--color--accent, #e67e22);
+}
