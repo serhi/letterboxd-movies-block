@@ -1,7 +1,13 @@
 .lbm-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	grid-template-columns: repeat(var(--lbm-columns, 4), 1fr);
 	gap: 1rem;
+}
+
+@media (max-width: 600px) {
+	.lbm-grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
 }
 
 .lbm-card {

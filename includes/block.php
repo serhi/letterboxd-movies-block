@@ -111,7 +111,7 @@ function lbm_render_callback( $attributes ) {
 		return '<p>' . esc_html__( 'No movies found. Check your username or try again later.', 'letterboxd-movies-block' ) . '</p>';
 	}
 
-	$grid_style = 'grid-template-columns: repeat(' . $columns . ', 1fr);';
+	$grid_style = '--lbm-columns: ' . $columns . ';';
 
 	ob_start();
 	?>
