@@ -15,9 +15,15 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 delete_option( 'lbm_username' );
 
 // Delete all cached transients.
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+// No WordPress API exists for bulk transient deletion by pattern; direct query is required here.
 global $wpdb;
-$wpdb->query(
-	"DELETE FROM {$wpdb->options}
-	 WHERE option_name LIKE '_transient_lbm_%'
-	    OR option_name LIKE '_transient_timeout_lbm_%'"
+$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+	$wpdb->prepare(
+		"DELETE FROM {$wpdb->options}
+		 WHERE option_name LIKE %s
+		    OR option_name LIKE %s",
+		'_transient_lbm_%',
+		'_transient_timeout_lbm_%'
+	)
 );

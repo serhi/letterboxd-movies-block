@@ -118,10 +118,15 @@ function lbm_render_settings_page() {
  * Delete all cached Letterboxd transients.
  */
 function lbm_delete_all_transients() {
+	// No WordPress API exists for bulk transient deletion by pattern; direct query is required here.
 	global $wpdb;
-	$wpdb->query(
-		"DELETE FROM {$wpdb->options}
-		 WHERE option_name LIKE '_transient_lbm_%'
-		    OR option_name LIKE '_transient_timeout_lbm_%'"
+	$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$wpdb->prepare(
+			"DELETE FROM {$wpdb->options}
+			 WHERE option_name LIKE %s
+			    OR option_name LIKE %s",
+			'_transient_lbm_%',
+			'_transient_timeout_lbm_%'
+		)
 	);
 }
